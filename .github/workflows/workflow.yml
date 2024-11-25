@@ -1,0 +1,51 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-n-test:
+    runs-on: ubuntu-latest
+    if: ${{ github.triggering_actor != 'github-classroom[bot]' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup_python
+        with:
+          python-version: '3.12'
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}
+          path: .venv
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          pip install --upgrade --editable tools/testlib
+          echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
+          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENVэ
+      - name: Save cached virtualenv
+        uses: actions/cache/save@v4
+        with:
+          key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}
+          path: .venv
+      - name: Run Flake8
+        working-directory: tasks
+        run: |
+          flake8 --toml-config=../pyproject.toml .
+      - name: Run Mypy
+        working-directory: tasks
+        run: |
+          mypy --config-file=../pyproject.toml .
+      - name: Run Pytest
+        working-directory: tasks
+        run: |
+          pytest
