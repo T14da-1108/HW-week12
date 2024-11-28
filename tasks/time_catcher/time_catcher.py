@@ -34,8 +34,8 @@ class TimeCatcher:
 
         self.soft_timeout = soft_timeout
         self.hard_timeout = hard_timeout
-        self.start_time = None
-        self.end_time = None
+        self.start_time: Optional[float] = None
+        self.end_time: Optional[float] = None
 
     def __enter__(self) -> "TimeCatcher":
         """Start the timer."""
@@ -43,7 +43,7 @@ class TimeCatcher:
         self.end_time = None
         return self
 
-    def __exit__(self, exc_type, exc_value, _) -> None:
+    def __exit__(self, exc_type: Optional[type], exc_value: Optional[BaseException], _) -> None:
         """Stop the timer and check for timeout violations."""
         self.end_time = time.perf_counter()
         elapsed = self.elapsed_time
