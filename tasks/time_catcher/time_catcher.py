@@ -16,6 +16,7 @@ class HardTimeoutException(TimeoutException):
     """Exception raised when the hard timeout is exceeded."""
     pass
 
+
 class TimeCatcher:
     def __init__(self, soft_timeout: Optional[float] = None, hard_timeout: Optional[float] = None) -> None:
         """
