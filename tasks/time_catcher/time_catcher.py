@@ -43,7 +43,12 @@ class TimeCatcher:
         self.end_time = None
         return self
 
-    def __exit__(self, exc_type: Optional[Type[BaseException]], exc_value: Optional[BaseException], traceback: Optional[Any]) -> None:
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        traceback: Optional[Any]
+    ) -> None:
         """Stop the timer and check for timeout violations."""
         self.end_time = time.perf_counter()
         elapsed = self.elapsed_time
