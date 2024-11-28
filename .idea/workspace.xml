@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4f32031-4e9c-443c-a3e9-e5e3ede39af2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/tasks/context_managers/context_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/context_managers/context_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/time_catcher/time_catcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/time_catcher/time_catcher.py" afterDir="false" />
-    </list>
+    <list default="true" id="b4f32031-4e9c-443c-a3e9-e5e3ede39af2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +13,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "T14da-1108"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/T14da-1108/HW-week12.git",
+    "accountId": "af71d19d-0763-452b-b7a2-b60d81f723f3"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>

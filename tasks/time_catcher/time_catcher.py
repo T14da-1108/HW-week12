@@ -1,4 +1,5 @@
 import time
+from typing import Optional
 
 
 class TimeoutException(Exception):
@@ -17,7 +18,7 @@ class HardTimeoutException(TimeoutException):
 
 
 class TimeCatcher:
-    def __init__(self, soft_timeout: float | None = None, hard_timeout: float | None = None) -> None:
+    def __init__(self, soft_timeout: Optional[float] = None, hard_timeout: Optional[float] = None) -> None:
         """
         Initialize the TimeCatcher context manager.
         :param soft_timeout: Soft timeout in seconds (optional).
@@ -33,18 +34,18 @@ class TimeCatcher:
 
         self.soft_timeout = soft_timeout
         self.hard_timeout = hard_timeout
-        self.start_time = None
-        self.end_time = None
+        self.start_time: Optional[float] = None  # type annotation added here
+        self.end_time: Optional[float] = None  # type annotation added here
 
     def __enter__(self) -> "TimeCatcher":
         """Start the timer."""
         self.start_time = time.perf_counter()
-        self.end_time = None
+        self.end_time = None  # this is fine, as self.end_time can be None initially
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback) -> None:
+    def __exit__(self, exc_type: Optional[type], exc_value: Optional[BaseException], traceback: Optional[traceback]) -> None:
         """Stop the timer and check for timeout violations."""
-        self.end_time = time.perf_counter()
+        self.end_time = time.perf_counter()  # self.end_time is now float, this will work
         elapsed = self.elapsed_time
 
         # Check soft timeout only if it's not None and not zero
