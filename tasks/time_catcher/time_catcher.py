@@ -16,7 +16,6 @@ class HardTimeoutException(TimeoutException):
     """Exception raised when the hard timeout is exceeded."""
     pass
 
-
 class TimeCatcher:
     def __init__(self, soft_timeout: Optional[float] = None, hard_timeout: Optional[float] = None) -> None:
         """
@@ -25,27 +24,27 @@ class TimeCatcher:
         :param hard_timeout: Hard timeout in seconds (optional).
         """
         # Validate timeout values
-        if soft_timeout is not None and (soft_timeout <= 0):
+        if soft_timeout is not None and soft_timeout <= 0:
             raise AssertionError("Soft timeout must be greater than 0 or None.")
-        if hard_timeout is not None and (hard_timeout <= 0):
+        if hard_timeout is not None and hard_timeout <= 0:
             raise AssertionError("Hard timeout must be greater than 0 or None.")
         if soft_timeout is not None and hard_timeout is not None and soft_timeout > hard_timeout:
             raise AssertionError("Soft timeout must be less than or equal to hard timeout.")
 
         self.soft_timeout = soft_timeout
         self.hard_timeout = hard_timeout
-        self.start_time: Optional[float] = None  # type annotation added here
-        self.end_time: Optional[float] = None  # type annotation added here
+        self.start_time = None
+        self.end_time = None
 
     def __enter__(self) -> "TimeCatcher":
         """Start the timer."""
         self.start_time = time.perf_counter()
-        self.end_time = None  # this is fine, as self.end_time can be None initially
+        self.end_time = None
         return self
 
-    def __exit__(self, exc_type: Optional[type], exc_value: Optional[BaseException], traceback: Optional[traceback]) -> None:
+    def __exit__(self, exc_type, exc_value, _) -> None:
         """Stop the timer and check for timeout violations."""
-        self.end_time = time.perf_counter()  # self.end_time is now float, this will work
+        self.end_time = time.perf_counter()
         elapsed = self.elapsed_time
 
         # Check soft timeout only if it's not None and not zero
